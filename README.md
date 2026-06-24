@@ -2,13 +2,7 @@
 
 让 ElBot 听到外部世界的声音——一条 curl 命令就能打通。
 
-**Elwisp Showcase** 是一套开箱即用的参考仓库，帮你用最短时间把任何外部信号（RSS、Webhook、日志、服务器状态……）接入 ElBot，让它替你记录、通知或智能分析，无需从零研究协议。
-
-> Give ElBot ears to the outside world — just a single curl command away.
->
-> **Elwisp Showcase** is a ready-to-use reference repository that lets you connect any external signal (RSS, webhook, logs, server status…) to ElBot in minutes, so it can record, notify, or analyze for you — no need to study the protocol from scratch.
-
----
+**Elwisp Showcase** 是 [ElBot](https://github.com/Elflare/elbot) 生态的参考仓库，帮你用最短时间把任何外部信号（RSS、Webhook、日志、服务器状态……）接入 ElBot，让它替你记录、通知或智能分析，无需从零研究协议。
 
 ## 你能用它做什么
 
@@ -21,7 +15,101 @@
 | 脚本/定时任务结果回传 | cron 跑完直接通知结果，不用开屏幕看 |
 | 游戏/设备状态监控 | Minecraft 服务器、传感器、智能家居事件 |
 
-**本质一句话：把任何"外面发生了什么"变成 ElBot 能处理的事件。**
+**把任何「外面发生了什么」变成 ElBot 能处理的事件。**
+
+## 为什么值得用
+
+- **零学习曲线**：复制 `send_event.sh`，改几行 payload，一条 curl 就能通
+- **安全优先**：所有示例遵循 token 环境变量、127.0.0.1 绑定、不硬编码等安全规范
+- **三种模式覆盖所有需求**：只记录 / 直接通知 / 交给 LLM 分析，按需选择
+- **协议文档齐全**：Elvena v2 字段说明、JSON Schema 校验、targets 用法一应俱全
+- **拿来即用，也可扩展**：最小示例验证链路后，可直接改造成生产监听器
+
+## 链路
+
+```
+外部世界
+  ↓
+Elwisp 监听器
+  ↓  Elvena v2 (JSON over HTTP)
+Elnis 事件枢纽
+  ↓
+ElBot: record / direct / llm
+```
+
+## 三种模式
+
+| 模式 | 说明 |
+|------|------|
+| record | 只记录 |
+| direct | 直接通知到聊天平台 |
+| llm | 后台 LLM 分析并决定是否通知 |
+
+## 快速开始
+
+```bash
+git clone https://github.com/Elfreese/elwisp-showcase.git
+cd elwisp-showcase
+
+cp .env.example .env
+# 编辑 .env，填入 ELNIS_TOKEN
+
+cd examples/minimal-direct
+. ../../.env
+./send_event.sh
+```
+
+如果聊天客户端收到了「测试事件」，链路就通了。
+
+## 目录
+
+```
+elwisp-showcase/
+├── README.md
+├── .env.example
+├── .gitignore
+├── LICENSE
+├── docs/
+│   ├── elwisp-overview.md
+│   ├── elvena-v2.md
+│   └── security.md
+├── schemas/
+│   └── elvena-v2.schema.json
+├── scripts/
+│   └── curl-healthz.sh
+└── examples/
+    ├── minimal-direct/
+    │   ├── README.md
+    │   └── send_event.sh
+    └── minimal-llm/
+        ├── README.md
+        └── send_event.sh
+```
+
+## 相关项目
+
+- [ElBot](https://github.com/Elflare/elbot) — 驱动一切的聊天机器人引擎
+- [Elflare](https://github.com/Elflare) — 芙蕾娅的主页
+
+## 核心原则
+
+- Elwisp 只观察和上报，不直接向聊天平台发消息
+- Token 只从环境变量读取
+- event id 在同一 source 内稳定且唯一
+- targets 由事件明确声明
+- 外部工具 endpoint 默认绑定 127.0.0.1
+
+## 许可证
+
+MIT
+
+---
+
+# Elwisp Showcase
+
+Give ElBot ears to the outside world — just a single curl command away.
+
+**Elwisp Showcase** is the reference repository for the [ElBot](https://github.com/Elflare/elbot) ecosystem — connect any external signal (RSS, webhook, logs, server status…) to ElBot in minutes. It records, notifies, or analyzes for you, no need to study the protocol from scratch.
 
 ## What you can do
 
@@ -34,17 +122,7 @@
 | Script/cron result delivery | Get cron job results pushed to chat, no need to SSH and check manually |
 | Game / device monitoring | Minecraft server status, sensors, smart home events |
 
-**In short: turn anything that happens outside into an event ElBot can handle.**
-
----
-
-## 为什么值得用
-
-- **零学习曲线**：复制 `send_event.sh`，改几行 payload，一条 curl 就能通
-- **安全优先**：所有示例遵循 token 环境变量、127.0.0.1 绑定、不硬编码等安全规范
-- **三种模式覆盖所有需求**：只记录 / 直接通知 / 交给 LLM 分析，按需选择
-- **协议文档齐全**：Elvena v2 字段说明、JSON Schema 校验、targets 用法一应俱全
-- **拿来即用，也可扩展**：最小示例验证链路后，可直接改造成生产监听器
+**Turn anything that happens outside into an event ElBot can handle.**
 
 ## Why this matters
 
@@ -54,85 +132,81 @@
 - **Complete protocol reference** — Elvena v2 field guide, JSON Schema, and targets documentation
 - **Copy, paste, adapt** — minimal examples validate the pipeline, then evolve into production watchers
 
----
-
-## 链路 / Pipeline
+## Pipeline
 
 ```
-外部世界 / Outside World
+Outside World
   ↓
-Elwisp 监听器 / Watcher
+Elwisp Watcher
   ↓  Elvena v2 (JSON over HTTP)
-Elnis 事件枢纽 / Event Hub
+Elnis Event Hub
   ↓
 ElBot: record / direct / llm
 ```
 
-## 三种模式 / Three Modes
+## Three Modes
 
-| Mode   | 说明 / Description |
-|--------|--------------------|
-| record | 只记录 / Log only |
-| direct | 直接通知到聊天平台 / Push notification to chat |
-| llm    | 后台 LLM 分析并决定是否通知 / Background LLM analysis with tool access |
+| Mode   | Description |
+|--------|-------------|
+| record | Log only |
+| direct | Push notification to chat |
+| llm    | Background LLM analysis with tool access |
 
-## 快速开始 / Quick Start
+## Quick Start
 
 ```bash
-# 1. 确保 Elnis 已启动 / Make sure Elnis is running
 git clone https://github.com/Elfreese/elwisp-showcase.git
 cd elwisp-showcase
 
-# 2. 设置 token / Set your token
 cp .env.example .env
-# 编辑 .env，填入真实 ELNIS_TOKEN / Edit .env with your real token
+# Edit .env with your ELNIS_TOKEN
 
-# 3. 发送第一条测试事件 / Send your first test event
 cd examples/minimal-direct
 . ../../.env
 ./send_event.sh
-
-# 如果你的聊天客户端收到了 "测试事件"，链路就通了！
-# If you received "测试事件" in your chat client, the pipeline is live!
 ```
 
-## 目录 / Directory
+If you received "测试事件" in your chat client, the pipeline is live.
+
+## Directory
 
 ```
 elwisp-showcase/
-├── README.md                         # 你在这里 / You are here
-├── .env.example                      # 环境变量模板 (no real token)
+├── README.md
+├── .env.example
 ├── .gitignore
 ├── LICENSE
 ├── docs/
-│   ├── elwisp-overview.md            # Elwisp 是什么、角色分工
-│   ├── elvena-v2.md                  # 协议字段、必填/可选、payload 示例
-│   └── security.md                   # Token、网络绑定、事件安全
+│   ├── elwisp-overview.md
+│   ├── elvena-v2.md
+│   └── security.md
 ├── schemas/
-│   └── elvena-v2.schema.json         # JSON Schema 校验定义
+│   └── elvena-v2.schema.json
 ├── scripts/
-│   └── curl-healthz.sh               # 一键检查 Elnis 健康
+│   └── curl-healthz.sh
 └── examples/
-    ├── minimal-direct/               # direct 模式：最简通知
+    ├── minimal-direct/
     │   ├── README.md
     │   └── send_event.sh
-    └── minimal-llm/                  # llm 模式：带 ELyph task 的后台分析
+    └── minimal-llm/
         ├── README.md
         └── send_event.sh
 ```
 
-## 核心原则 / Core Principles
+## Related
 
-- Elwisp 只观察和上报，不直接向聊天平台发消息 / Elwisp only observes and reports; never sends chat messages directly
-- Token 只从环境变量读取 / Token only from environment variables
-- event id 在同一 source 内稳定且唯一 / event id is stable and unique within each source
-- targets 由事件明确声明 / targets are explicitly declared per event
-- 外部工具 endpoint 默认绑定 127.0.0.1 / External tool endpoints default to 127.0.0.1
+- [ElBot](https://github.com/Elflare/elbot) — the chat bot engine that powers everything
+- [Elflare](https://github.com/Elflare) — Elflare's GitHub
 
-## 许可证 / License
+## Core Principles
+
+- Elwisp only observes and reports; never sends chat messages directly
+- Token only from environment variables
+- event id is stable and unique within each source
+- targets are explicitly declared per event
+- External tool endpoints default to 127.0.0.1
+
+## License
 
 MIT
 
----
-
-> 冰与火双生 · Elfreese & Elflare
