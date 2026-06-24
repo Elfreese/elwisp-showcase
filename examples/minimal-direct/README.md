@@ -29,3 +29,37 @@ export ELNIS_TOKEN=your-token-here
 - `content` — 通知正文
 - `targets` — 推送到哪些平台
 - `source` / `id` — 去重标识（同 source+id 只投递一次）
+
+---
+
+# minimal-direct
+
+A minimal direct mode example.
+
+## Purpose
+
+Verify that the Elwisp → Elnis pipeline is working. Send one direct event, and Elnis will notify the specified targets directly.
+
+## Usage
+
+```bash
+# Set environment variables
+export ELNIS_ENDPOINT=http://127.0.0.1:32170/elvena/v2/events
+export ELNIS_TOKEN=your-token-here
+
+# Send the event
+./send_event.sh
+```
+
+## Result
+
+If the pipeline is working, you will receive a notification message on the platform specified in targets.
+
+## Customization
+
+Edit the payload in `send_event.sh`:
+
+- `title` — notification title
+- `content` — notification body
+- `targets` — platforms to push to
+- `source` / `id` — deduplication key; events with the same source+id are delivered only once

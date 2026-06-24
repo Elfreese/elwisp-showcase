@@ -38,3 +38,46 @@ content 中的 ELyph task 是 LLM 的指令。本示例中的 `#task review_even
 ```
 
 最终可用的工具由 Elnis `allowed_tools` 裁决。
+
+---
+
+# minimal-llm
+
+A minimal llm mode example.
+
+## Purpose
+
+Verify the Elwisp → Elnis → background LLM Session pipeline. Send one llm event, and Elnis will start a background Session, use an ELyph task to analyze the event, and may call tools when needed.
+
+## Usage
+
+```bash
+# Set environment variables
+export ELNIS_ENDPOINT=http://127.0.0.1:32170/elvena/v2/events
+export ELNIS_TOKEN=your-token-here
+
+# Send the event
+./send_event.sh
+```
+
+## Result
+
+If the pipeline is working, the background LLM will analyze the event and return the result to the platform specified in targets.
+
+## content notes
+
+The ELyph task in content is the LLM instruction. In this example, `#task review_event` will:
+
+1. Receive the event object
+2. Make a judgment based on the event content and tool results
+3. If notification is needed, provide the reason and suggestions; otherwise explain why there is no need to interrupt
+
+## Adding tools
+
+Declare required tools in the `tool_list_names` array:
+
+```json
+"tool_list_names": ["web_search", "read_file"]
+```
+
+The final available tools are decided by Elnis `allowed_tools`.
