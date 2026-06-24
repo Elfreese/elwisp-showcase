@@ -1,0 +1,9 @@
+.env
+__pycache__/
+*.pyc
+*.log
+*.swp
+*.swo
+.DS_Store
+/dist/
+/node_modules/
