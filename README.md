@@ -89,7 +89,6 @@ elwisp-showcase/
 ## 相关项目
 
 - [ElBot](https://github.com/Elflare/elbot) — 驱动一切的聊天机器人引擎
-- [Elflare](https://github.com/Elflare) — 芙蕾娅的主页
 
 ## 核心原则
 
@@ -196,7 +195,6 @@ elwisp-showcase/
 ## Related
 
 - [ElBot](https://github.com/Elflare/elbot) — the chat bot engine that powers everything
-- [Elflare](https://github.com/Elflare) — Elflare's GitHub
 
 ## Core Principles
 
