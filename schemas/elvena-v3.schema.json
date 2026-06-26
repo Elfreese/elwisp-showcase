@@ -1,0 +1,94 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Elvena v3 Event",
+  "description": "Elwisp to Elnis event payload (v3: adds segments & calls)",
+  "type": "object",
+  "required": ["version", "elwisp", "source", "id", "mode", "content", "targets"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "const": "elvena.v3"
+    },
+    "elwisp": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string", "pattern": "^[A-Za-z0-9_-]+$" },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "source": { "type": "string" },
+    "id": { "type": "string" },
+    "mode": {
+      "type": "string",
+      "enum": ["record", "direct", "llm"]
+    },
+    "title": { "type": "string" },
+    "content": { "type": "string" },
+    "format": {
+      "type": "string",
+      "enum": ["text", "elyph"]
+    },
+    "created_at": { "type": "string", "format": "date-time" },
+    "model_slot": {
+      "type": "string",
+      "enum": ["elwisp1", "elwisp2", "elwisp3"]
+    },
+    "tool_list_names": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "tools": { "type": "array" },
+    "segments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["kind"],
+        "properties": {
+          "kind": { "type": "string", "enum": ["text", "image", "file"] },
+          "text": { "type": "string" },
+          "url": { "type": "string" },
+          "name": { "type": "string" },
+          "mime_type": { "type": "string" }
+        }
+      }
+    },
+    "calls": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "kind": { "type": "string", "enum": ["raw", "capability"] },
+          "name": { "type": "string" },
+          "platform": { "type": "string" },
+          "target": {
+            "type": "object",
+            "properties": {
+              "platform": { "type": "string" },
+              "type": { "type": "string" },
+              "id": { "type": "string" }
+            }
+          },
+          "api": { "type": "string" },
+          "params": { "type": "object" }
+        }
+      }
+    },
+    "meta": { "type": "object" },
+    "targets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["platform"],
+        "properties": {
+          "platform": { "type": "string" },
+          "type": { "type": "string" },
+          "id": { "type": "string" }
+        }
+      }
+    }
+  }
+}

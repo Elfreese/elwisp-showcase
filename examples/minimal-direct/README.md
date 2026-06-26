@@ -4,7 +4,7 @@
 
 ## 用途
 
-验证 Elwisp → Elnis 链路是否通畅。发送一条 direct 事件，Elnis 会直接通知 targets。
+验证 Elwisp → Elnis 链路是否通畅。发送一条 direct 事件，Elnis 会直接通知 targets。使用 Elvena v3 协议。
 
 ## 使用
 
@@ -38,7 +38,7 @@ A minimal direct mode example.
 
 ## Purpose
 
-Verify that the Elwisp → Elnis pipeline is working. Send one direct event, and Elnis will notify the specified targets directly.
+Verify that the Elwisp → Elnis pipeline is working. Send one direct event, and Elnis will notify the specified targets directly. Uses the Elvena v3 protocol.
 
 ## Usage
 

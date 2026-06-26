@@ -1,4 +1,7 @@
-# Elvena v2 协议
+# Elvena v2 协议（归档）
+
+> **当前版本为 Elvena v3**，见 [Elvena v3 协议](elvena-v3.md)。v3 在 v2 基础上新增了 `segments`（多模态消息段）和 `calls`（平台动作调用），其余字段完全兼容。本文档保留作为 v2 参考。
+
 
 Elvena v2 是 Elwisp 向 Elnis 投递事件的 JSON over HTTP 协议。
 

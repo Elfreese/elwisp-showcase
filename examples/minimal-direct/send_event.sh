@@ -13,7 +13,7 @@ curl -s -X POST "$ENDPOINT" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $TOKEN" \
   -d '{
-    "version": "elvena.v2",
+    "version": "elvena.v3",
     "elwisp": {
       "name": "minimal-direct-example",
       "tags": ["example", "minimal"]

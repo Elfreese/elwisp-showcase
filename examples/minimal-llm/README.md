@@ -4,7 +4,7 @@
 
 ## 用途
 
-验证 Elwisp → Elnis → 后台 LLM Session 链路。发送一条 llm 事件，Elnis 会启动后台 Session，用 ELyph task 分析事件并可能调用工具。
+验证 Elwisp → Elnis → 后台 LLM Session 链路。发送一条 llm 事件，Elnis 会启动后台 Session，用 ELyph task 分析事件并可能调用工具。使用 Elvena v3 协议。
 
 ## 使用
 
@@ -47,7 +47,7 @@ A minimal llm mode example.
 
 ## Purpose
 
-Verify the Elwisp → Elnis → background LLM Session pipeline. Send one llm event, and Elnis will start a background Session, use an ELyph task to analyze the event, and may call tools when needed.
+Verify the Elwisp → Elnis → background LLM Session pipeline. Send one llm event, and Elnis will start a background Session, use an ELyph task to analyze the event, and may call tools when needed. Uses the Elvena v3 protocol.
 
 ## Usage
 

@@ -4,7 +4,7 @@
 
 Elwisp 是 ElBot 生态中的**外部事件监听器**。
 
-它的职责很纯粹：观察某个外部信息源，发现值得注意的事件后，按 Elvena v2 协议向 Elnis 上报。
+它的职责很纯粹：观察某个外部信息源，发现值得注意的事件后，按 Elvena v3 协议向 Elnis 上报。
 
 Elwisp 不参与：
 - 聊天平台消息收发
@@ -28,7 +28,7 @@ ElBot   ─执行者─▶  record / direct 通知 / llm 分析
 ### Elwisp 负责
 
 - 监听外部信息来源
-- 构造符合 Elvena v2 的事件
+- 构造符合 Elvena v3 的事件
 - 上报到 Elnis
 - 声明自己可以使用的工具（tools 字段）
 - 管理自己的状态和重试

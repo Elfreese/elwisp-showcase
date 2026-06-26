@@ -2,7 +2,7 @@
 
 让 ElBot 听到外部世界的声音——一条 curl 命令就能打通。
 
-**Elwisp Showcase** 是 [ElBot](https://github.com/Elflare/elbot) 生态的参考仓库，帮你用最短时间把任何外部信号（RSS、Webhook、日志、服务器状态……）接入 ElBot，让它替你记录、通知或智能分析，无需从零研究协议。
+**Elwisp Showcase** 是 [ElBot](https://github.com/Elflare/elbot) 生态的参考仓库，帮你用最短时间把任何外部信号（RSS、Webhook、日志、服务器状态……）接入 ElBot，让它替你记录、通知或智能分析，无需从零研究协议。基于 Elvena v3 协议。
 
 ## 你能用它做什么
 
@@ -22,7 +22,7 @@
 - **零学习曲线**：复制 `send_event.sh`，改几行 payload，一条 curl 就能通
 - **安全优先**：所有示例遵循 token 环境变量、127.0.0.1 绑定、不硬编码等安全规范
 - **三种模式覆盖所有需求**：只记录 / 直接通知 / 交给 LLM 分析，按需选择
-- **协议文档齐全**：Elvena v2 字段说明、JSON Schema 校验、targets 用法一应俱全
+- **协议文档齐全**：Elvena v3 字段说明、JSON Schema 校验、segments/calls 用法一应俱全
 - **拿来即用，也可扩展**：最小示例验证链路后，可直接改造成生产监听器
 
 ## 链路
@@ -31,7 +31,7 @@
 外部世界
   ↓
 Elwisp 监听器
-  ↓  Elvena v2 (JSON over HTTP)
+  ↓  Elvena v3 (JSON over HTTP)
 Elnis 事件枢纽
   ↓
 ElBot: record / direct / llm
@@ -71,9 +71,11 @@ elwisp-showcase/
 ├── LICENSE
 ├── docs/
 │   ├── elwisp-overview.md
+│   ├── elvena-v3.md
 │   ├── elvena-v2.md
 │   └── security.md
 ├── schemas/
+│   ├── elvena-v3.schema.json
 │   └── elvena-v2.schema.json
 ├── scripts/
 │   └── curl-healthz.sh
@@ -81,7 +83,10 @@ elwisp-showcase/
     ├── minimal-direct/
     │   ├── README.md
     │   └── send_event.sh
-    └── minimal-llm/
+    ├── minimal-llm/
+    │   ├── README.md
+    │   └── send_event.sh
+    └── calls-demo/
         ├── README.md
         └── send_event.sh
 ```
@@ -108,7 +113,7 @@ MIT
 
 Give ElBot ears to the outside world — just a single curl command away.
 
-**Elwisp Showcase** is the reference repository for the [ElBot](https://github.com/Elflare/elbot) ecosystem — connect any external signal (RSS, webhook, logs, server status…) to ElBot in minutes. It records, notifies, or analyzes for you, no need to study the protocol from scratch.
+**Elwisp Showcase** is the reference repository for the [ElBot](https://github.com/Elflare/elbot) ecosystem — connect any external signal (RSS, webhook, logs, server status…) to ElBot in minutes. It records, notifies, or analyzes for you, no need to study the protocol from scratch. Based on the Elvena v3 protocol.
 
 ## What you can do
 
@@ -128,7 +133,7 @@ Give ElBot ears to the outside world — just a single curl command away.
 - **Zero learning curve** — copy `send_event.sh`, tweak a few payload fields, one curl, done
 - **Secure by default** — all examples respect token-in-env, 127.0.0.1 binding, no hardcoded secrets
 - **Three modes, one protocol** — record, direct notify, or LLM-powered analysis; pick what fits
-- **Complete protocol reference** — Elvena v2 field guide, JSON Schema, and targets documentation
+- **Complete protocol reference** — Elvena v3 field guide, JSON Schema, segments/calls documentation
 - **Copy, paste, adapt** — minimal examples validate the pipeline, then evolve into production watchers
 
 ## Pipeline
@@ -137,7 +142,7 @@ Give ElBot ears to the outside world — just a single curl command away.
 Outside World
   ↓
 Elwisp Watcher
-  ↓  Elvena v2 (JSON over HTTP)
+  ↓  Elvena v3 (JSON over HTTP)
 Elnis Event Hub
   ↓
 ElBot: record / direct / llm
@@ -177,9 +182,11 @@ elwisp-showcase/
 ├── LICENSE
 ├── docs/
 │   ├── elwisp-overview.md
+│   ├── elvena-v3.md
 │   ├── elvena-v2.md
 │   └── security.md
 ├── schemas/
+│   ├── elvena-v3.schema.json
 │   └── elvena-v2.schema.json
 ├── scripts/
 │   └── curl-healthz.sh
@@ -187,7 +194,10 @@ elwisp-showcase/
     ├── minimal-direct/
     │   ├── README.md
     │   └── send_event.sh
-    └── minimal-llm/
+    ├── minimal-llm/
+    │   ├── README.md
+    │   └── send_event.sh
+    └── calls-demo/
         ├── README.md
         └── send_event.sh
 ```
