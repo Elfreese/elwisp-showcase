@@ -13,6 +13,10 @@
 
 ## 前端预览
 
+ElBot 前后端分离，前端完全可定制——想写什么好看的界面都行。
+
+这里的截图展示了不同的前端形态。除 TUI 外，其余是概念性 HTML mockup，不代表最终 UI，仅用于展示 agent 可以自由构建前端的能力。
+
 <p align="center">
   <img src="frontend/assets/frontend_1.png" width="280" />
   <img src="frontend/assets/frontend_2.jpg" width="280" />
@@ -35,6 +39,10 @@ A collection of showcases for the [ElBot](https://github.com/Elflare/elbot) ecos
 More showcases coming soon.
 
 ## Frontend Preview
+
+ElBot separates front-end from back-end — the UI is fully customizable. Write whatever interface you want.
+
+The screenshots below showcase different front-end styles. Except for the TUI, these are conceptual HTML mockups, not final UI — they demonstrate the freedom an agent has in crafting front-ends.
 
 <p align="center">
   <img src="frontend/assets/frontend_1.png" width="280" />
